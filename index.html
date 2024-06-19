@@ -22,12 +22,16 @@
             display: flex;
             justify-content: center;
             background-color: #16213e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         nav a {
             color: #fff;
             padding: 14px 20px;
             text-decoration: none;
             text-align: center;
+            transition: background-color 0.3s;
         }
         nav a:hover {
             background-color: #0f3460;
@@ -50,6 +54,45 @@
             width: 100%;
             bottom: 0;
         }
+        .portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .portfolio img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .resume ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .resume ul li {
+            margin: 10px 0;
+        }
+        .resume .collapsible {
+            cursor: pointer;
+            background-color: #0f3460;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        .resume .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        @media screen and (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,10 +103,10 @@
 </header>
 
 <nav>
-    <a href="#" onclick="showSection('about')">About Me</a>
-    <a href="#" onclick="showSection('resume')">Resume</a>
-    <a href="#" onclick="showSection('contact')">Contact</a>
-    <a href="#" onclick="showSection('works')">Works</a>
+    <a href="#about" onclick="showSection('about')">About Me</a>
+    <a href="#resume" onclick="showSection('resume')">Resume</a>
+    <a href="#contact" onclick="showSection('contact')">Contact</a>
+    <a href="#works" onclick="showSection('works')">Works</a>
 </nav>
 
 <section id="about" class="about">
@@ -73,22 +116,41 @@
 
 <section id="resume" class="resume">
     <h2>Resume</h2>
-    <p>Here you can add a link to your resume or list your experience, skills, and education.</p>
-    <ul>
-        <li>Education: Swarthmore College</li>
-        <li>Fields of Study: Philosophy, Economics, Computer Science</li>
-        <li>Skills: Programming, Critical Thinking, Economic Analysis</li>
-    </ul>
+    <button type="button" class="collapsible">Education</button>
+    <div class="content">
+        <ul>
+            <li>Swarthmore College</li>
+            <li>Fields of Study: Philosophy, Economics, Computer Science</li>
+        </ul>
+    </div>
+    <button type="button" class="collapsible">Skills</button>
+    <div class="content">
+        <ul>
+            <li>Programming</li>
+            <li>Critical Thinking</li>
+            <li>Economic Analysis</li>
+        </ul>
+    </div>
 </section>
 
 <section id="contact" class="contact">
     <h2>Contact</h2>
     <p>If you wish to get in touch, please email me at: <a href="mailto:joshua.leinwand@example.com">joshua.leinwand@example.com</a></p>
+    <p>Connect with me on social media:</p>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/joshua-leinwand" target="_blank">LinkedIn</a></li>
+        <li><a href="https://twitter.com/josh_leinwand" target="_blank">Twitter</a></li>
+    </ul>
 </section>
 
 <section id="works" class="works">
     <h2>Works</h2>
     <p>Here you can showcase your projects, papers, or any other works you have completed.</p>
+    <div class="portfolio">
+        <img src="work1.jpg" alt="Work 1">
+        <img src="work2.jpg" alt="Work 2">
+        <img src="work3.jpg" alt="Work 3">
+    </div>
 </section>
 
 <footer>
@@ -99,7 +161,20 @@
     function showSection(section) {
         document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
         document.getElementById(section).style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    document.querySelectorAll('.collapsible').forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('active');
+            var content = button.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    });
 </script>
 
 </body>
