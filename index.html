@@ -3,180 +3,564 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshua Leinwand - Personal Webpage</title>
+    <meta name="description" content="Joshua Leinwand, Swarthmore College. Economics and mathematics. Seeking predoctoral research positions, 2027.">
+    <title>Joshua Leinwand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,ital,wght@8..60,400;8..60,600;8..60,700;8..60,400i;8..60,600i&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --navy: #1a1a2e;
+            --navy-mid: #16213e;
+            --accent: #0f3460;
+            --page: #f0f0f0;
+            --text: #333333;
+            --muted: #5c6370;
+            --paper: #ffffff;
+            --rule: rgba(26, 26, 46, 0.16);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
             margin: 0;
-            padding: 0;
+            color: var(--text);
+            background: var(--page);
+            font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+            font-optical-sizing: auto;
+            line-height: 1.65;
         }
-        header {
-            background-color: #1a1a2e;
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.18em;
+        }
+
+        a:hover {
+            color: var(--navy);
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .skip {
+            position: absolute;
+            left: -999px;
+            top: 0;
+            background: var(--navy);
             color: #fff;
-            padding: 20px;
-            text-align: center;
+            padding: 0.55rem 0.9rem;
+            z-index: 2000;
         }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #16213e;
+
+        .skip:focus {
+            left: 1rem;
+            top: 1rem;
+        }
+
+        .running-head {
             position: sticky;
             top: 0;
             z-index: 1000;
-        }
-        nav a {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1.25rem;
+            padding: 0.7rem 6vw;
+            background: var(--navy);
             color: #fff;
-            padding: 14px 20px;
+            border-bottom: 3px solid var(--accent);
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+        }
+
+        .running-head a {
+            color: #fff;
             text-decoration: none;
-            text-align: center;
-            transition: background-color 0.3s;
         }
-        nav a:hover {
-            background-color: #0f3460;
-        }
-        section {
-            padding: 20px;
-            margin: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .about, .resume, .contact, .works {
-            display: none;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #1a1a2e;
+
+        .running-head a:hover {
             color: #fff;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            text-decoration: underline;
+            text-underline-offset: 0.22em;
         }
-        .portfolio {
+
+        .author-mark {
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        .running-head nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+            gap: 1.15rem;
+            font-size: 0.78rem;
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
         }
-        .portfolio img {
-            max-width: 200px;
-            max-height: 200px;
-            object-fit: cover;
+
+        .sheet {
+            width: min(980px, calc(100% - 2.25rem));
+            margin: 1.75rem auto 3.5rem;
+            background: var(--paper);
+            padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.35rem, 4vw, 3rem) 3rem;
+            box-shadow: 0 0 0 1px var(--rule);
         }
-        .resume ul {
-            list-style-type: none;
-            padding: 0;
+
+        .letterhead {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid var(--rule);
         }
-        .resume ul li {
-            margin: 10px 0;
+
+        .dossier {
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
         }
-        .resume .collapsible {
-            cursor: pointer;
-            background-color: #0f3460;
-            color: white;
-            padding: 10px;
-            text-align: left;
-            border: none;
-            outline: none;
+
+        .portrait {
+            margin: 0;
+        }
+
+        .portrait img {
             width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            object-position: 62% 40%;
+            display: block;
         }
-        .resume .content {
-            padding: 0 18px;
+
+        .portrait figcaption {
+            margin: 0.5rem 0 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .correspondence {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .correspondence span {
+            display: block;
+            font-variant: small-caps;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            font-size: 0.72rem;
+        }
+
+        .identity h1 {
+            margin: 0 0 0.35rem;
+            font-size: clamp(2.15rem, 4.5vw, 2.85rem);
+            font-weight: 700;
+            line-height: 1.12;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .affiliation {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .degree {
+            margin: 0.15rem 0 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .market {
+            margin: 1.15rem 0 0;
+            padding: 0.55rem 0;
+            border-top: 1px solid var(--navy);
+            border-bottom: 1px solid var(--navy);
+            color: var(--navy);
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.78rem;
+            font-variant: small-caps;
+            letter-spacing: 0.14em;
+            font-weight: 600;
+        }
+
+        .interests {
+            margin: 1.25rem 0 0;
+        }
+
+        .label {
+            margin: 0 0 0.35rem;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.72rem;
+            font-variant: small-caps;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .interest-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 0;
+            font-size: 0.98rem;
+        }
+
+        .interest-list li:not(:last-child)::after {
+            content: "·";
+            margin: 0 0.55rem;
+            color: var(--muted);
+        }
+
+        .note {
+            margin: 1.15rem 0 0;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent);
+            font-size: 1.02rem;
+        }
+
+        .note p {
+            margin: 0;
+        }
+
+        .aside {
+            margin: 0.7rem 0 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+            font-style: italic;
+        }
+
+        .section {
+            margin-top: 2.35rem;
+        }
+
+        .section-title {
+            margin: 0 0 0.35rem;
+            color: var(--navy);
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .biblio {
+            padding: 1rem 0 1.15rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .biblio:last-child {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .biblio h3 {
+            margin: 0;
+            font-size: 1.08rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--navy);
+        }
+
+        .biblio .authors,
+        .biblio .cite {
+            margin: 0.2rem 0 0;
+            font-size: 0.95rem;
+        }
+
+        .biblio .cite {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .biblio .cite a {
+            font-style: normal;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.86rem;
+        }
+
+        .biblio details {
+            margin-top: 0.55rem;
+        }
+
+        .biblio summary {
+            list-style: none;
+            cursor: pointer;
+            width: fit-content;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.78rem;
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .biblio summary::-webkit-details-marker {
             display: none;
-            overflow: hidden;
-            background-color: #f0f0f0;
         }
-        @media screen and (max-width: 600px) {
-            nav {
+
+        .biblio summary::before {
+            content: "▸ ";
+            font-style: normal;
+        }
+
+        .biblio details[open] summary::before {
+            content: "▾ ";
+        }
+
+        .biblio summary:hover,
+        .biblio summary:focus-visible {
+            color: var(--navy);
+            outline: none;
+        }
+
+        .abstract {
+            margin: 0.65rem 0 0;
+            padding: 0.15rem 0 0.15rem 1rem;
+            border-left: 2px solid var(--navy-mid);
+            font-size: 0.95rem;
+        }
+
+        .abstract p {
+            margin: 0;
+        }
+
+        .site-footer {
+            background: var(--navy);
+            color: rgba(255, 255, 255, 0.78);
+            text-align: center;
+            padding: 1rem;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 760px) {
+            .running-head {
                 flex-direction: column;
+                gap: 0.45rem;
+                padding: 0.8rem 5vw 0.7rem;
+            }
+
+            .letterhead {
+                grid-template-columns: 1fr;
+                gap: 1.35rem;
+            }
+
+            .portrait {
+                max-width: 320px;
+            }
+
+            .note {
+                padding-left: 0.8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        @media print {
+            .running-head,
+            .site-footer {
+                display: none;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            .sheet {
+                width: auto;
+                margin: 0;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .abstract {
+                display: block !important;
             }
         }
     </style>
 </head>
 <body>
+    <a class="skip" href="#identity">Skip to content</a>
 
-<header>
-    <h1>Joshua Leinwand</h1>
-    <p>Student at Swarthmore College | Economics, Mathematics, and Philosophy |  </p>
-</header>
+    <header class="running-head">
+        <a class="author-mark" href="#top">Joshua Taft Leinwand</a>
+        <nav aria-label="On this page">
+            <a href="#papers">Working papers</a>
+            <a href="#research">Research assistance</a>
+            <a href="Joshua%20Leinwand%20CV.pdf" target="_blank" rel="noopener noreferrer">Curriculum vitae</a>
+        </nav>
+    </header>
 
-<nav>
-    <a href="#about" onclick="showSection('about')">About Me</a>
-    <a href="#resume" onclick="showSection('resume')">Resume</a>
-    <a href="#contact" onclick="showSection('contact')">Contact</a>
-    <a href="#works" onclick="showSection('works')">Works</a>
-</nav>
+    <main id="top">
+        <article class="sheet">
+            <header class="letterhead">
+                <div class="dossier">
+                    <figure class="portrait">
+                        <img src="headshot.jpg" alt="Joshua Leinwand at the Blackhead Cliffs on Monhegan Island">
+                        <figcaption>Me exploring the Blackhead Cliffs on Monhegan Island</figcaption>
+                    </figure>
+                    <ul class="correspondence">
+                        <li>
+                            <span>Curriculum vitae</span>
+                            <a href="Joshua%20Leinwand%20CV.pdf" target="_blank" rel="noopener noreferrer">Joshua Leinwand CV.pdf</a>
+                        </li>
+                        <li>
+                            <span>Email</span>
+                            <a href="mailto:jleinwa1@swarthmore.edu">jleinwa1@swarthmore.edu</a>
+                        </li>
+                        <li>
+                            <span>Code</span>
+                            <a href="https://github.com/jtleinwand" target="_blank" rel="noopener noreferrer">github.com/jtleinwand</a>
+                        </li>
+                        <li>
+                            <span>LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/joshua-leinwand-354883271/" target="_blank" rel="noopener noreferrer">linkedin.com/in/joshua-leinwand</a>
+                        </li>
+                    </ul>
+                </div>
 
-<section id="about" class="about">
-    <h2>About Me</h2>
-    <p>Hello! I'm Joshua Leinwand, a sophomore at Swarthmore College studying philosophy, economics, and computer science. My interests lie in understanding the causes of large scale human and market behvaior through both qualitative and quantative analyctic measures, and applying this knowledge to real-world problems. Outside of the classroom, I'm a member of the Swarthmore Varsity Cross Country and Track team, a Student Academic Mentor, an executive board member of the McCabe Scholars, a consultant for 180 degres consulting, and a member of Swat Volunteers. In my free time, I enjoy running, reading, finding new music, and exploring nature, .</p>
-</section>
+                <div class="identity" id="identity">
+                    <h1>Joshua Leinwand</h1>
+                    <p class="affiliation">Swarthmore College</p>
+                    <p class="degree">B.A. expected May 2027 · Honors Economics Major, Philosopy and Mathematics Minors</p>
+                    
+                    <div class="interests">
+                        <p class="label">Research interests</p>
+                        <ul class="interest-list">
+                            <li>Industrial Organization</li>
+                            <li>Public Economics</li>
+                            <li>Labor Economics</li>
+                        </ul>
+                    </div>
+                    <div class="note">
+                        <p>I am a senior at Swarthmore College pursuing an honor major in economics, as well as minors in mathematics and philosophy. I am deeply interested in the idea of using economics as a tool for societal good, through utilizing industrial organization methods to investigate market power concerns, as well as using quantitative methodologies to understand how to properly approach educational policies at the parental, local, and national level. I have been lucky enough to perform both dynamic programming research to solve macroeconomic models under Stephen O'Connell, as well as structural IO research across large data sets to model firm lobbying behavior with Marc Remer. I’m deeply passionate about harnessing novel computational methods, such as AI, cutting-edge packages, and novel econometric techniques to assist in research, and intend to pursue a Ph.D. in economics.
+                        </p>
+                    </div>
+                    <p class="aside">Outside of research I love to read, run, design games, cook, and meander aimlessly through whatever woods I can find.</p>
+                </div>
+            </header>
 
-<section id="resume" class="resume">
-    <h2>Resume</h2>
-    <button type="button" class="collapsible">Education</button>
-    <div class="content">
-        <ul>
-            <li>Swarthmore College</li>
-            <li>Fields of Study: Double Major in Philosophy & Economics, Minor in Computer Science</li>
-            <li>Relavent Coursework: PHIL 012 Logic, PHIL 027 Ethics & Technology, ECON 001 Introduction to Economics, ECON 035 Introduction to Econometrics, CPSC 035 Data Structures and Algorithims</li>
-        </ul>
-    </div>
-    <button type="button" class="collapsible">Skills</button>
-    <div class="content">
-        <ul>
-            <li>Programming</li>
-            <li>Critical Thinking</li>
-            <li>Economic Analysis</li>
-        </ul>
-    </div>
-</section>
+            <section class="section" id="papers" aria-labelledby="papers-title">
+                <div class="section-title">
+                    <h2 id="papers-title">Working papers</h2>
+                </div>
+                <div>
+                    <article class="biblio">
+                        <h3>Estimating Intergenerational Effects of Early Age Human Capital
+                            Investment</h3>
+                        <p class="authors">Stephen O'Connell, Michael Pham, Joshua Leinwand</p>
+                        <p class="cite">Working paper, August 2026. </p>
+                        <details>
+                            <summary>Abstract</summary>
+                            <div class="abstract">
+                                <p>We estimate the true early-age human capital production function and distinguish its parameters from those perceived by parents. Following Attanasio et al. (2020), we model child human capital and parental investment as latent factors and use a control-function approach to address the endogeneity of investment. We then embed the estimated production function in an overlapping-generations model of forward-looking parental investment, drawing on Del Boca et al. (2014). Within the model, parents choose investments according to the production technology they perceive, while children’s human capital outcomes are governed by the true technology. Differences between the perceived and true parameters therefore generate systematic under- or over-investment, with consequences that may be compounded across stages of childhood and across generations. Using NLSY79 data, we estimate the parameters of the structural model by simulated method of moments and quantify the extent to which parental misperceptions distort investment choices, the distribution of child human capital, and the intergenerational evolution of human capital.</p>
+                            </div>
+                        </details>
+                    </article>
+                    <article class="biblio">
+                        <h3><a href="Market%20Structure%20and%20Cost%20Pass-Through%20in%20Retail%20Gasoline.pdf" target="_blank" rel="noopener noreferrer">Market Structure and Cost Pass-Through in Retail Gasoline</a></h3>
+                        <p class="authors">Joshua Leinwand</p>
+                        <p class="cite">Working paper, July 2026.</p>
+                        <details>
+                            <summary>Abstract</summary>
+                            <div class="abstract">
+                                <p>In this paper I seek to understand whether the structure of a local gasoline market changes
+                                    the degree to which wholesale costs are passed through into retail prices. To do so, I use
+                                    604,817 station-week observations covering 6,556 stations, first estimating station and
+                                    calendar-week fixed-effects models before interacting wholesale costs with measures of
+                                    local concentration. I find that above-median HHI is associated with a 0.0070 increase in
+                                    pass-through, while a one-standard-deviation increase in nearby rivals is associated with a
+                                    0.0026 decrease; both estimates are significant at the 1 percent level. The independent-
+                                    station share, by contrast, has no statistically significant relationship with pass-through.
+                                    The dynamic results suggest that concentration changes the timing of adjustment rather
+                                    than simply increasing it at every point, while a complementary margin regression finds
+                                    that a 0.10 increase in HHI is associated with roughly 0.8 cents per gallon in higher
+                                    margins. Thus, although these estimates are conditional relationships rather than causal
+                                    merger effects, local competitive structure nevertheless appears within the pricing conduct
+                                    that consumers face.</p>
+                            </div>
+                        </details>
+                    </article>
+                </div>
+            </section>
 
-<section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>If you wish to get in touch, please email me at: <a href="mailto:jleinwa1@swarthmore.edu">jleinwa1@swarthmore.edu</a></p>
-    <p>Connect with me on social media:</p>
-    <ul>
-        <li><a href="https://www.linkedin.com/in/joshua-leinwand-354883271/" target="_blank">LinkedIn</a></li>
-        <li><a href="https://twitter.com/josh_leinwand" target="_blank">Twitter</a></li>
-    </ul>
-</section>
+            <section class="section" id="research" aria-labelledby="research-title">
+                <div class="section-title">
+                    <h2 id="research-title">Research assistantship</h2>
+                </div>
+                <div>
+                    <article class="biblio">
+                        <h3><a href="https://www.mergermeta.com/" target="_blank" rel="noopener noreferrer">Price Effects in U.S. Merger Retrospectives: A Meta-Analytic Approach</a></h3>
+                        <p class="cite">Andrew Olsen, Reed Orchinik, Marc Remer · Working Paper · July 2026</p>
+                        <details>
+                            <summary>Description</summary>
+                            <div class="abstract">
+                                <p>We conduct a meta-analysis of U.S. merger retrospectives, a large and growing literature that investigates ex post merger outcomes—typically price—through reduced-form methods. We first document that mergers studied are unrepresentative of the universe of U.S. mergers but are observably similar to mergers that receive antitrust scrutiny. We then synthesize the literature by computing a summary price effect using a Bayesian hierarchical model. For the subset of papers in our sample that estimate log-price effects, we find a mean price increase of 7.06%. We also develop a new meta-analytic approach that allows us to combine and analyze different outcomes affected by mergers. Using this methodology, for the entire sample of papers that study price, we find that anticompetitive outcomes are 1.7 times more likely than procompetitive outcomes. We also find that price effects are higher for healthcare and airline mergers.
 
-<section id="works" class="works">
-    <h2>Works</h2>
-    <p>Here you can showcase your projects, papers, or any other works you have completed.</p>
-    <div class="portfolio">
-        <img src="work1.jpg" alt="Work 1">
-        <img src="work2.jpg" alt="Work 2">
-        <img src="work3.jpg" alt="Work 3">
-    </div>
-</section>
+                                    We maintain a companion website (https://www.mergermeta.com/) tracking developments in the merger retrospective literature and welcome submissions of new results.</p>
+                            </div>
+                        </details>
+                    </article>
+                    <article class="biblio">
+                        <h3>An Analysis of the Connection Between the Structure of Markets and
+                            Lobbying Expenditures</h3>
+                        <p class="cite">Andrew Olsen, Marc Remer · Working Paper · August 2025</p>
+                        <details>
+                            <summary>Description</summary>
+                            <div class="abstract">
+                                <p>We analyze the connection between the structure of markets and lobbying expenditures. Markets with fewer firms with greater market share tend to have higher prices and less innovation.  Traditional measures of market share and structure, however, may overstate the actual level of competition between firms.  This is because these measures do not account for the holdings of large institutional investors, such as BlackRock and Vanguard, which have ownership stakes in multiple firms in the same market. We  build on recent research showing that larger ownership stakes by institutional investors within a market leads to higher prices. In particular, we will be looking at how the holdings of institutional investors within a market affects the degree to which firms lobby the federal government. To undertake the analysis, we develop a theoretical model which explains the connection between market structure, institutional investors, and the incentive to lobby the federal government. We will test predictions of the model using a large dataset on lobbying expenditures and investor holdings. Part of the empirical analysis is descriptive in nature, showing general trends in lobbying expenditure and institutional investment. We also test the causal relationship between lobbying and institutional investment, in order to see if these investors are incentivizing firms to lobby the government at the expense of consumer welfare. 
+                                </p>
+                            </div>
+                        </details>
+                    </article>
+                </div>
+            </section>
+        </article>
+    </main>
 
-<footer>
-    <p>&copy; 2024 Joshua Leinwand</p>
-</footer>
+    <footer class="site-footer">
+        <p>Last updated August 2026 · Joshua Leinwand</p>
+    </footer>
 
-<script>
-    function showSection(section) {
-        document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-        document.getElementById(section).style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    <script>
+        const setAbstracts = (open) => {
+            document.querySelectorAll("details").forEach((item) => {
+                item.open = open;
+            });
+        };
 
-    document.querySelectorAll('.collapsible').forEach(button => {
-        button.addEventListener('click', () => {
-            button.classList.toggle('active');
-            var content = button.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    });
-</script>
-
+        window.addEventListener("beforeprint", () => setAbstracts(true));
+        window.addEventListener("afterprint", () => setAbstracts(false));
+    </script>
 </body>
 </html>
